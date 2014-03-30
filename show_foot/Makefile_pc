@@ -1,0 +1,22 @@
+CC = gcc
+CFLAGS = -Wall -Wextra -ansi -pedantic -g
+LDFLAGS = -lSDL -lSDL_image
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+BIN = showfoot
+RM = rm -f
+
+$(BIN) : $(OBJ)
+	$(CC) -o $(BIN) $(OBJ) $(CFLAGS) $(LDFLAGS)
+
+main.o : main.c
+	$(CC) -c main.c $(CFLAGS)
+
+%.o : %.c %.h
+	$(CC) -c $< $(CFLAGS)
+
+clean :
+	$(RM) $(OBJ)
+
+mrproper : clean
+	$(RM) $(BIN) *~
