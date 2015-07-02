@@ -10,7 +10,8 @@ macro (psp_executable name sources)
     COMMAND psp-fixup-imports ${name}.elf
     COMMAND mksfo "Hello World" PARAM.SFO
     COMMAND psp-strip ${name}.elf -o ${name}_strip.elf
-    COMMAND pack-pbp EBOOT.PBP PARAM.SFO NULL NULL NULL NULL NULL ${name}_strip.elf NULL)
+    COMMAND pack-pbp EBOOT.PBP PARAM.SFO NULL NULL NULL NULL NULL ${name}_strip.elf NULL
+    COMMAND ${CMAKE_COMMAND} -E remove ${name}_strip.elf)
 endmacro ()
 
 psp_executable (hello_world main.c)
